@@ -1,0 +1,6 @@
+﻿{
+  "host": "localhost",
+  "protocal": "http",
+  "port": 80,
+  "timeout": 120
+}

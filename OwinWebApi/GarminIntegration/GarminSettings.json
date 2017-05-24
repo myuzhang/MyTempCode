@@ -1,0 +1,45 @@
+{
+  "running": "test", 
+  "environments": [
+    {
+      "platform": "test",
+      "credential": {
+        "secret": "H2fLP459wma7ziWh97jlp5Wgledyg2FQa8X",
+        "key": "8bd339ee-9b3a-4a04-894f-b0860ccc7657"
+      },
+      "serviceProvider": {
+        "requestTokenEndpoint": "http://connectapitest.garmin.com/oauth-service-1.0/oauth/request_token",
+        "userAuthorizationEndpoint": "http://connecttest.garmin.com/oauthConfirm",
+        "accessTokenEndpoint": "http://connectapitest.garmin.com/oauth-service-1.0/oauth/access_token"
+      },
+      "messageReceivingEndpoint": {
+        "dailySummaries": "https://gcsapitest.garmin.com/wellness-api/rest/dailies",
+        "activitySummaries": "https://gcsapitest.garmin.com/wellness-api/rest/activities",
+        "backfillSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/backfill/dailies",
+        "sleepSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/sleeps",
+        "epochSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/epochs",
+        "bodyCompositionSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/bodyComps"
+      }
+    },
+    {
+      "platform": "production",
+      "credential": {
+        "secret": "H2fLP459wma7ziWh97jlp5Wgledyg2FQa8X",
+        "key": "8bd339ee-9b3a-4a04-894f-b0860ccc7657"
+      },
+      "serviceProvider": {
+        "requestTokenEndpoint": "http://connectapitest.garmin.com/oauth-service-1.0/oauth/request_token",
+        "userAuthorizationEndpoint": "http://connecttest.garmin.com/oauthConfirm",
+        "accessTokenEndpoint": "http://connectapitest.garmin.com/oauth-service-1.0/oauth/access_token"
+      },
+      "messageReceivingEndpoint": {
+        "dailySummaries": "https://gcsapitest.garmin.com/wellness-api/rest/dailies",
+        "activitySummaries": "https://gcsapitest.garmin.com/wellness-api/rest/activities",
+        "backfillSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/backfill/dailies",
+        "sleepSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/sleeps",
+        "epochSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/epochs",
+        "bodyCompositionSummaries": "https://gcsapitest.garmin.com/wellness-api/rest/bodyComps"
+      }
+    }
+  ]
+}
