@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
 using Autofac.Integration.WebApi;
-using GarminIntegration;
+using Oauth;
 
 namespace WebApi
 {

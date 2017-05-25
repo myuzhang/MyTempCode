@@ -160,9 +160,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GarminIntegration\GarminIntegration.csproj">
+    <ProjectReference Include="..\Oauth\Oauth.csproj">
       <Project>{6c9c7b05-704f-4ed7-95e0-f8ceb456e678}</Project>
-      <Name>GarminIntegration</Name>
+      <Name>Oauth</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

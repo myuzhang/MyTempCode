@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using GarminIntegration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Service;
+using Oauth;
+using OwinService;
 
 namespace UnitTest
 {

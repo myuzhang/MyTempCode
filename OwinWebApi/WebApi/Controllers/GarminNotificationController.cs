@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using GarminIntegration;
 using Newtonsoft.Json.Linq;
+using Oauth;
 using WebApi.Models;
 
 namespace WebApi.Controllers

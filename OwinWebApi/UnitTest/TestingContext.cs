@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Service;
+using OwinService;
 
 namespace UnitTest
 {

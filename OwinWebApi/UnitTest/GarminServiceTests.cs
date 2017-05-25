@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GarminIntegration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Oauth;
 using WebApi.Models;
 
 namespace UnitTest

@@ -93,13 +93,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GarminIntegration\GarminIntegration.csproj">
+    <ProjectReference Include="..\Oauth\Oauth.csproj">
       <Project>{6c9c7b05-704f-4ed7-95e0-f8ceb456e678}</Project>
-      <Name>GarminIntegration</Name>
+      <Name>Oauth</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Service\Service.csproj">
+    <ProjectReference Include="..\OwinService\OwinService.csproj">
       <Project>{6aa4b53d-c5f0-41d0-9e39-5c4c779c2245}</Project>
-      <Name>Service</Name>
+      <Name>OwinService</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApi\WebApi.csproj">
       <Project>{6d03df49-0908-4e6c-8af9-3d1615ae5bc3}</Project>

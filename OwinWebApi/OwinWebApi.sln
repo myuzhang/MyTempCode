@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarminIntegration", "GarminIntegration\GarminIntegration.csproj", "{6C9C7B05-704F-4ED7-95E0-F8CEB456E678}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oauth", "Oauth\Oauth.csproj", "{6C9C7B05-704F-4ED7-95E0-F8CEB456E678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{6AA4B53D-C5F0-41D0-9E39-5C4C779C2245}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwinService", "OwinService\OwinService.csproj", "{6AA4B53D-C5F0-41D0-9E39-5C4C779C2245}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{EC283DF2-1BCE-40D9-9459-511E04F2E80C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{6D03DF49-0908-4E6C-8AF9-3D1615AE5BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{64CE2051-3F6B-46D3-8DDF-BB3D79461192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{821F542F-5990-42E4-A4E0-400212E41DAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{6D03DF49-0908-4E6C-8AF9-3D1615AE5BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D03DF49-0908-4E6C-8AF9-3D1615AE5BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D03DF49-0908-4E6C-8AF9-3D1615AE5BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64CE2051-3F6B-46D3-8DDF-BB3D79461192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CE2051-3F6B-46D3-8DDF-BB3D79461192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CE2051-3F6B-46D3-8DDF-BB3D79461192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CE2051-3F6B-46D3-8DDF-BB3D79461192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821F542F-5990-42E4-A4E0-400212E41DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821F542F-5990-42E4-A4E0-400212E41DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821F542F-5990-42E4-A4E0-400212E41DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821F542F-5990-42E4-A4E0-400212E41DAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
