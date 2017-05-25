@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{821F542F-5990-42E4-A4E0-400212E41DAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhitePages", "WhitePages\WhitePages.csproj", "{AA9267BA-55B3-4F60-8E1B-22902C51CB0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{821F542F-5990-42E4-A4E0-400212E41DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{821F542F-5990-42E4-A4E0-400212E41DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{821F542F-5990-42E4-A4E0-400212E41DAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA9267BA-55B3-4F60-8E1B-22902C51CB0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA9267BA-55B3-4F60-8E1B-22902C51CB0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA9267BA-55B3-4F60-8E1B-22902C51CB0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA9267BA-55B3-4F60-8E1B-22902C51CB0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

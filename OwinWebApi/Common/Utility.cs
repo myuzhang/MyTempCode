@@ -54,7 +54,7 @@ namespace Common
             return names[0].FirstCharToUpper();
         }
 
-        public static string FirstCharToUpper(this string value)
+        public static string FirstCharToUpper1(this string value)
         {
             if (string.IsNullOrEmpty(value))
                 return null;
