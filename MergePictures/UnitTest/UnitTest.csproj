@@ -63,13 +63,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MergeImage\MergeImage.csproj">
+      <Project>{edb15a9a-3983-475e-bc4f-72dd32b7f941}</Project>
+      <Name>MergeImage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MergePictures\MergePictures.csproj">
       <Project>{66fb820e-57da-45fc-89ac-f735fb7535eb}</Project>
       <Name>MergePictures</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

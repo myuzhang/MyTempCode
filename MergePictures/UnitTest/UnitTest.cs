@@ -1,11 +1,11 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MergePictures;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MergeImage;
 
 namespace UnitTest
 {
     [TestClass]
     [DeploymentItem("Samples", "Samples")]
+    [DeploymentItem("Settings.json")]
     public class UnitTest
     {
         private const string from = @"Samples\DHA.png";
