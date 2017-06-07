@@ -11,10 +11,7 @@ namespace MergeImage
         private readonly string _fromImageFile;
         private readonly string _toImageFile;
         private readonly Settings _settings;
-
-        private Bitmap _to;
-        private Bitmap _from;
-
+        
         public OverwritePixel(string fromImageFile, string toImageFile)
         {
             _toImageFile = toImageFile;
@@ -30,45 +27,32 @@ namespace MergeImage
                 string json = r.ReadToEnd();
                 _settings = JsonConvert.DeserializeObject<Settings>(json);
             }
-
-            _from = new Bitmap(_fromImageFile);
-            _to = new Bitmap(_toImageFile);
-
-            if (_from.Width != _to.Width || _from.Height != _to.Height)
-            {
-                if (!_settings.NeedScale)
-                    throw new ArgumentException("Merging pictures don't have the same size");
-
-                int minWidth = Math.Min(_from.Width, _to.Width);
-                int minHeight = Math.Min(_from.Height, _to.Height);
-
-                _from = new Bitmap(_from, new Size(minWidth, minHeight));
-                _to = new Bitmap(_to, new Size(minWidth, minHeight));
-
-                // for debugging:
-                //from.Save("from.jpg", ImageFormat.Jpeg);
-                //to.Save("to.jpg", ImageFormat.Jpeg);
-            }          
         }
 
         public Bitmap OverwriteWithoutPlotBackground()
-        {              
-            for (int y = 0; y < _from.Height; y++)
+        {
+            var from = GetScaledImage(_fromImageFile);
+            var to = GetScaledImage(_toImageFile);
+
+            for (int y = 0; y < from.Height; y++)
             {
-                for (int x = 0; x < _from.Height; x++)
+                for (int x = 0; x < from.Height; x++)
                 {
-                    if (!_from.GetPixel(x, y).Name.Equals(_settings.BackgroundColorName))
-                        _to.SetPixel(x, y, _from.GetPixel(x, y));
+                    if (!from.GetPixel(x, y).Name.Equals(_settings.BackgroundColorName))
+                        to.SetPixel(x, y, from.GetPixel(x, y));
                 }
             }
-            return _to;
+            return to;
         }
 
         public Bitmap OverwriteWithPlotBackground()
         {
-            var newFrom = Overwrite(_from, _to);
-            _to = new Bitmap(_toImageFile);
-            return RefillColorToOutOfPlot(newFrom, _to);
+            var from = GetScaledImage(_fromImageFile);
+            var to = GetScaledImage(_toImageFile);
+
+            var newFrom = Overwrite(from, to);
+            to = GetScaledImage(_toImageFile);
+            return RefillColorToOutOfPlot(newFrom, to);
         }
 
         private Bitmap RefillColorToOutOfPlot(Bitmap from, Bitmap to)
@@ -173,6 +157,31 @@ namespace MergeImage
                 if (!from.GetPixel(x, y).Name.Equals(_settings.BackgroundColorName))
                     to.SetPixel(x, y, from.GetPixel(x, y));
             }
-        }       
+        }
+
+        private Bitmap GetScaledImage(string imageFile)
+        {
+            var from = new Bitmap(_fromImageFile);
+            var to = new Bitmap(_toImageFile);
+
+            var returnImage = new Bitmap(imageFile);
+
+            if (from.Width != to.Width || from.Height != to.Height)
+            {
+                if (!_settings.NeedScale)
+                    throw new ArgumentException("Merging pictures don't have the same size");
+
+                int minWidth = Math.Min(from.Width, to.Width);
+                int minHeight = Math.Min(from.Height, to.Height);
+
+                // for debugging:
+                //from.Save("from.jpg", ImageFormat.Jpeg);
+                //to.Save("to.jpg", ImageFormat.Jpeg);
+
+                return new Bitmap(returnImage, new Size(minWidth, minHeight));
+            }
+
+            return returnImage;
+        }
     }
 }
