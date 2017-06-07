@@ -83,28 +83,76 @@ namespace MergePictures
                 to = new Bitmap(to, new Size(minWidth, minHeight));
             }
 
-            int blockPixel = from.Width/BlockNumber;
+            var newFrom = Overwrite(from, to, true);
+            to = new Bitmap(_toImageFile);
+            return Overwrite(newFrom, to, false);
+        }
 
-            for (int y = BorderWidthInPixel; y < from.Height - BorderWidthInPixel; y++)
+        //public Bitmap ReverseOverwriteVertical(Bitmap from, Bitmap to)
+        //{
+        //    int blockPixel = from.Height / BlockNumber;
+        //    for (int x = BorderWidthInPixel; x < from.Width - BorderWidthInPixel; x++)
+        //    {
+        //        for (int blockNum = 0; blockNum < BlockNumber; blockNum++)
+        //        {
+        //            int validStart;
+        //            int validEnd;
+        //            int topBorder = blockPixel * blockNum + BorderWidthInPixel;
+        //            int bottomtBorder = blockPixel * (blockNum + 1) - BorderWidthInPixel;
+
+        //            if (GetValidVerticalColorRange(from, x, topBorder, bottomtBorder, out validStart, out validEnd))
+        //                OverwriteVertical(from, to, x, validStart, validEnd);
+
+        //            OverwriteVertical(from, to, x, bottomtBorder, bottomtBorder + BorderWidthInPixel * 2, false);
+        //        }
+        //    }
+        //}
+
+        public Bitmap Overwrite(Bitmap from, Bitmap to, bool isByHorizon)
+        {
+            if (isByHorizon)
             {
-                for (int blockNum = 0; blockNum < BlockNumber; blockNum++)
+                int blockPixel = from.Width / BlockNumber;
+                for (int y = BorderWidthInPixel; y < from.Height - BorderWidthInPixel; y++)
                 {
-                    int validStart;
-                    int validEnd;
-                    int leftBorder = blockPixel*blockNum + BorderWidthInPixel;
-                    int rightBorder = blockPixel*(blockNum + 1) - BorderWidthInPixel;
+                    for (int blockNum = 0; blockNum < BlockNumber; blockNum++)
+                    {
+                        int validStart;
+                        int validEnd;
+                        int leftBorder = blockPixel * blockNum + BorderWidthInPixel;
+                        int rightBorder = blockPixel * (blockNum + 1) - BorderWidthInPixel;
 
-                    if (GetValidColorRange(from, y, leftBorder, rightBorder, out validStart, out validEnd))
-                        Overwrite(from, to, y, validStart, validEnd);
+                        if (GetValidHorizontalColorRange(from, y, leftBorder, rightBorder, out validStart, out validEnd))
+                            OverwriteHorizon(from, to, y, validStart, validEnd);
 
-                    Overwrite(from, to, y, rightBorder, rightBorder + BorderWidthInPixel*2, false);
+                        OverwriteHorizon(from, to, y, rightBorder, rightBorder + BorderWidthInPixel * 2, false);
+                    }
+                }
+            }
+            else
+            {
+                int blockPixel = from.Height / BlockNumber;
+                for (int x = BorderWidthInPixel; x < from.Width - BorderWidthInPixel; x++)
+                {
+                    for (int blockNum = 0; blockNum < BlockNumber; blockNum++)
+                    {
+                        int validStart;
+                        int validEnd;
+                        int topBorder = blockPixel * blockNum + BorderWidthInPixel;
+                        int bottomtBorder = blockPixel * (blockNum + 1) - BorderWidthInPixel;
+
+                        if (GetValidVerticalColorRange(from, x, topBorder, bottomtBorder, out validStart, out validEnd))
+                            OverwriteVertical(from, to, x, validStart, validEnd);
+
+                        OverwriteVertical(from, to, x, bottomtBorder, bottomtBorder + BorderWidthInPixel * 2, false);
+                    }
                 }
             }
 
             return to;
         }
 
-        private bool GetValidColorRange(
+        private bool GetValidHorizontalColorRange(
             Bitmap source,
             int imageY,
             int leftBorder,
@@ -145,7 +193,7 @@ namespace MergePictures
             return true;
         }
 
-        private void Overwrite(Bitmap from, Bitmap to, int y, int startX, int endX, bool withBackground = true)
+        private void OverwriteHorizon(Bitmap from, Bitmap to, int y, int startX, int endX, bool withBackground = true)
         {
             if (startX < 0 || endX < 0)
                 return;
@@ -164,6 +212,72 @@ namespace MergePictures
             }
 
             for (int x = startX; x <= endX; x++)
+            {
+                if (!from.GetPixel(x, y).Name.Equals(BackgroundName))
+                    to.SetPixel(x, y, from.GetPixel(x, y));
+            }
+        }
+
+        private bool GetValidVerticalColorRange(
+            Bitmap source,
+            int imageX,
+            int topBorder,
+            int bottomBorder,
+            out int validStart,
+            out int validEnd)
+        {
+            validStart = 0;
+            validEnd = 0;
+
+            bool found = false;
+
+            if (topBorder > bottomBorder)
+                return false;
+
+            for (int y = topBorder; y <= bottomBorder; y++)
+            {
+                var p = source.GetPixel(imageX, y);
+                if (!p.Name.Equals(BackgroundName))
+                {
+                    validStart = y;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                return false;
+
+            for (int y = bottomBorder; y >= topBorder; y--)
+            {
+                var p = source.GetPixel(imageX, y);
+                if (!p.Name.Equals(BackgroundName))
+                {
+                    validEnd = y;
+                    break;
+                }
+            }
+            return true;
+        }
+
+        private void OverwriteVertical(Bitmap from, Bitmap to, int x, int startY, int endY, bool withBackground = true)
+        {
+            if (startY < 0 || endY < 0)
+                return;
+
+            if (startY >= from.Height)
+                startY = from.Height - 1;
+
+            if (endY >= from.Height)
+                endY = from.Height - 1;
+
+            if (withBackground)
+            {
+                for (int y = startY; y <= endY; y++)
+                    to.SetPixel(x, y, from.GetPixel(x, y));
+                return;
+            }
+
+            for (int y = startY; y <= endY; y++)
             {
                 if (!from.GetPixel(x, y).Name.Equals(BackgroundName))
                     to.SetPixel(x, y, from.GetPixel(x, y));
