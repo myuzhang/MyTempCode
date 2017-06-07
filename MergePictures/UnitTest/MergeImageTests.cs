@@ -6,7 +6,7 @@ namespace UnitTest
     [TestClass]
     [DeploymentItem("Samples", "Samples")]
     [DeploymentItem("Settings.json")]
-    public class UnitTest
+    public class MergeImageTests
     {
         private const string from = @"Samples\DHA.png";
         private const string to = @"Samples\ColorMap.png";

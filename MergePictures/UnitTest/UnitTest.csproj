@@ -46,12 +46,15 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest.cs" />
+    <Compile Include="DrawColorMapTests.cs" />
+    <Compile Include="MergeImageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +69,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ColorMapGeneration\ColorMapGeneration.csproj">
+      <Project>{27ed3422-d0f0-440e-9710-1cd7b5b6d77d}</Project>
+      <Name>ColorMapGeneration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MergeImage\MergeImage.csproj">
       <Project>{edb15a9a-3983-475e-bc4f-72dd32b7f941}</Project>
       <Name>MergeImage</Name>

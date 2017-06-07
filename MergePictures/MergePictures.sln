@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeImage", "MergeImage\MergeImage.csproj", "{EDB15A9A-3983-475E-BC4F-72DD32B7F941}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorMapGeneration", "ColorMapGeneration\ColorMapGeneration.csproj", "{27ED3422-D0F0-440E-9710-1CD7B5B6D77D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EDB15A9A-3983-475E-BC4F-72DD32B7F941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDB15A9A-3983-475E-BC4F-72DD32B7F941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDB15A9A-3983-475E-BC4F-72DD32B7F941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27ED3422-D0F0-440E-9710-1CD7B5B6D77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27ED3422-D0F0-440E-9710-1CD7B5B6D77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27ED3422-D0F0-440E-9710-1CD7B5B6D77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27ED3422-D0F0-440E-9710-1CD7B5B6D77D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
