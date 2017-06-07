@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -6,10 +7,13 @@ namespace MergePictures
 {
     public static class MergePictureHelpers
     {
+        public static string NewImageFile =>
+            $@"{ConfigurationManager.AppSettings["filePath"]}\{DateTime.UtcNow.Ticks.ToString()}.jpg";
+
         public static Bitmap MergeImages(string fromImage, string toImage)
         {
             var overwrite = new OverwritePixel(fromImage, toImage);
-            return overwrite.Overwrite();
+            return overwrite.OverwriteWithoutBackground();
         }
 
         public static Bitmap MergeAllImages(string fromImage, string toImage)
@@ -23,6 +27,6 @@ namespace MergePictures
 
         // todo: format can be set from app settings
         public static void Save(this Bitmap source) =>
-            SaveAs(source, DateTime.UtcNow.Ticks.ToString(), ImageFormat.Jpeg);
+            SaveAs(source, NewImageFile, ImageFormat.Jpeg);
     }
 }
