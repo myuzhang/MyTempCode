@@ -7,6 +7,6 @@
         public string BackgroundColorName { get; set; }
         public string PlotBorderColorName { get; set; }
         public bool NeedScale { get; set; }
-        public string FilePath { get; set; }
+        public string MergedFileDefaultPath { get; set; }
     }
 }
