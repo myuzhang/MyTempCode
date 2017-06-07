@@ -28,13 +28,16 @@ namespace MergePictures
         public int BorderWidthInPixel =>
             Int32.Parse(ConfigurationManager.AppSettings["borderWidthInPixel"]);
 
-        public string BackgroundName =>
-            ConfigurationManager.AppSettings["backgroundName"];
+        public string BackgroundColorName =>
+            ConfigurationManager.AppSettings["backgroundColorName"];
+
+        public string PlotBorderColorName =>
+            ConfigurationManager.AppSettings["plotBorderColorName"];
 
         public bool NeedScale =>
             bool.Parse(ConfigurationManager.AppSettings["needScale"]);
 
-        public Bitmap OverwriteWithoutBackground()
+        public Bitmap OverwriteWithoutPlotBackground()
         {
             var from = new Bitmap(_fromImageFile);
             var to = new Bitmap(_toImageFile);
@@ -58,7 +61,7 @@ namespace MergePictures
             {
                 for (int x = 0; x < from.Height; x++)
                 {
-                    if (!from.GetPixel(x, y).Name.Equals(BackgroundName))
+                    if (!from.GetPixel(x, y).Name.Equals(BackgroundColorName))
                         to.SetPixel(x, y, from.GetPixel(x, y));
                 }
             }
@@ -66,7 +69,7 @@ namespace MergePictures
             return to;
         }
 
-        public Bitmap OverwriteAll()
+        public Bitmap OverwriteWithPlotBackground()
         {
             var from = new Bitmap(_fromImageFile);
             var to = new Bitmap(_toImageFile);
@@ -83,32 +86,29 @@ namespace MergePictures
                 to = new Bitmap(to, new Size(minWidth, minHeight));
             }
 
-            var newFrom = Overwrite(from, to, true);
+            var newFrom = Overwrite(from, to);
             to = new Bitmap(_toImageFile);
-            return Overwrite(newFrom, to, false);
+            return RefillColorToOutOfPlot(newFrom, to);
         }
 
-        //public Bitmap ReverseOverwriteVertical(Bitmap from, Bitmap to)
-        //{
-        //    int blockPixel = from.Height / BlockNumber;
-        //    for (int x = BorderWidthInPixel; x < from.Width - BorderWidthInPixel; x++)
-        //    {
-        //        for (int blockNum = 0; blockNum < BlockNumber; blockNum++)
-        //        {
-        //            int validStart;
-        //            int validEnd;
-        //            int topBorder = blockPixel * blockNum + BorderWidthInPixel;
-        //            int bottomtBorder = blockPixel * (blockNum + 1) - BorderWidthInPixel;
+        private Bitmap RefillColorToOutOfPlot(Bitmap from, Bitmap to)
+        {
+            for (int x = BorderWidthInPixel; x < from.Width - BorderWidthInPixel; x++)
+            {
+                for (int y = BorderWidthInPixel; y < from.Height - BorderWidthInPixel; y++)
+                {
+                    var p = from.GetPixel(x, y);
+                    if (p.Name.Equals(PlotBorderColorName))
+                        break;
 
-        //            if (GetValidVerticalColorRange(from, x, topBorder, bottomtBorder, out validStart, out validEnd))
-        //                OverwriteVertical(from, to, x, validStart, validEnd);
+                    if (p.Name.Equals(BackgroundColorName))
+                        from.SetPixel(x, y, to.GetPixel(x, y));
+                }
+            }
+            return from;
+        }
 
-        //            OverwriteVertical(from, to, x, bottomtBorder, bottomtBorder + BorderWidthInPixel * 2, false);
-        //        }
-        //    }
-        //}
-
-        public Bitmap Overwrite(Bitmap from, Bitmap to, bool isByHorizon)
+        private Bitmap Overwrite(Bitmap from, Bitmap to, bool isByHorizon = true)
         {
             if (isByHorizon)
             {
@@ -171,7 +171,7 @@ namespace MergePictures
             for (int x = leftBorder; x <= rightBorder; x++)
             {
                 var p = source.GetPixel(x, imageY);
-                if (!p.Name.Equals(BackgroundName))
+                if (!p.Name.Equals(BackgroundColorName))
                 {
                     validStart = x;
                     found = true;
@@ -184,7 +184,7 @@ namespace MergePictures
             for (int x = rightBorder; x >= leftBorder; x--)
             {
                 var p = source.GetPixel(x, imageY);
-                if (!p.Name.Equals(BackgroundName))
+                if (!p.Name.Equals(BackgroundColorName))
                 {
                     validEnd = x;
                     break;
@@ -213,7 +213,7 @@ namespace MergePictures
 
             for (int x = startX; x <= endX; x++)
             {
-                if (!from.GetPixel(x, y).Name.Equals(BackgroundName))
+                if (!from.GetPixel(x, y).Name.Equals(BackgroundColorName))
                     to.SetPixel(x, y, from.GetPixel(x, y));
             }
         }
@@ -237,7 +237,7 @@ namespace MergePictures
             for (int y = topBorder; y <= bottomBorder; y++)
             {
                 var p = source.GetPixel(imageX, y);
-                if (!p.Name.Equals(BackgroundName))
+                if (!p.Name.Equals(BackgroundColorName))
                 {
                     validStart = y;
                     found = true;
@@ -250,7 +250,7 @@ namespace MergePictures
             for (int y = bottomBorder; y >= topBorder; y--)
             {
                 var p = source.GetPixel(imageX, y);
-                if (!p.Name.Equals(BackgroundName))
+                if (!p.Name.Equals(BackgroundColorName))
                 {
                     validEnd = y;
                     break;
@@ -279,7 +279,7 @@ namespace MergePictures
 
             for (int y = startY; y <= endY; y++)
             {
-                if (!from.GetPixel(x, y).Name.Equals(BackgroundName))
+                if (!from.GetPixel(x, y).Name.Equals(BackgroundColorName))
                     to.SetPixel(x, y, from.GetPixel(x, y));
             }
         }

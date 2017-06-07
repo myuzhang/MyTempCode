@@ -18,6 +18,13 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void TestOverwrite()
+        {
+            var mergeAll = MergePictureHelpers.MergeImages(from, to);
+            mergeAll.Save();
+        }
+
+        [TestMethod]
         public void TestOverwriteAll()
         {
             var mergeAll = MergePictureHelpers.MergeAllImages(from, to);

@@ -13,13 +13,13 @@ namespace MergePictures
         public static Bitmap MergeImages(string fromImage, string toImage)
         {
             var overwrite = new OverwritePixel(fromImage, toImage);
-            return overwrite.OverwriteWithoutBackground();
+            return overwrite.OverwriteWithoutPlotBackground();
         }
 
         public static Bitmap MergeAllImages(string fromImage, string toImage)
         {
             var overwrite = new OverwritePixel(fromImage, toImage);
-            return overwrite.OverwriteAll();
+            return overwrite.OverwriteWithPlotBackground();
         }
 
         public static void SaveAs(this Bitmap source, string fileName,  ImageFormat format) =>
