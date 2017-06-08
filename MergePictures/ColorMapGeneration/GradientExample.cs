@@ -12,6 +12,8 @@ namespace ColorMapGeneration
     public class GradientExample
     {
         // refer to: https://msdn.microsoft.com/en-us/library/0sdy66e6(v=vs.110).aspx
+        // refer to: https://stackoverflow.com/questions/2011832/generate-color-gradient-in-c-sharp
+        // refer to: https://stackoverflow.com/questions/986352/how-to-do-that-gradient-color-generator
 
         Bitmap _myBitmap;
         Graphics _g;
