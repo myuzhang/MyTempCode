@@ -31,8 +31,9 @@ namespace MergeImage
 
         public Bitmap OverwriteWithoutPlotBackground()
         {
-            var from = GetScaledImage(_fromImageFile);
-            var to = GetScaledImage(_toImageFile);
+            //var from = GetScaledColorImage(_fromImageFile);
+            var from = new Bitmap(_fromImageFile);
+            var to = GetScaledColorImage(_toImageFile);
 
             for (int y = 0; y < from.Height; y++)
             {
@@ -47,11 +48,12 @@ namespace MergeImage
 
         public Bitmap OverwriteWithPlotBackground()
         {
-            var from = GetScaledImage(_fromImageFile);
-            var to = GetScaledImage(_toImageFile);
+            //var from = GetScaledColorImage(_fromImageFile);
+            var from = new Bitmap(_fromImageFile);
+            var to = GetScaledColorImage(_toImageFile);
 
             var newFrom = Overwrite(from, to);
-            to = GetScaledImage(_toImageFile);
+            to = GetScaledColorImage(_toImageFile);
             return RefillColorToOutOfPlot(newFrom, to);
         }
 
@@ -159,7 +161,8 @@ namespace MergeImage
             }
         }
 
-        private Bitmap GetScaledImage(string imageFile)
+        // FIXME: can only scale color map
+        private Bitmap GetScaledColorImage(string imageFile)
         {
             var from = new Bitmap(_fromImageFile);
             var to = new Bitmap(_toImageFile);
@@ -171,14 +174,11 @@ namespace MergeImage
                 if (!_settings.NeedScale)
                     throw new ArgumentException("Merging pictures don't have the same size");
 
-                int minWidth = Math.Min(from.Width, to.Width);
-                int minHeight = Math.Min(from.Height, to.Height);
-
                 // for debugging:
                 //from.Save("from.jpg", ImageFormat.Jpeg);
                 //to.Save("to.jpg", ImageFormat.Jpeg);
-
-                return new Bitmap(returnImage, new Size(minWidth, minHeight));
+                
+                return new Bitmap(returnImage, new Size(from.Width, from.Height));
             }
 
             return returnImage;

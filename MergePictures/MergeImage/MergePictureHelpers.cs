@@ -34,11 +34,22 @@ namespace MergeImage
             return overwrite.OverwriteWithPlotBackground();
         }
 
-        public static void SaveAs(this Bitmap source, string fileName, ImageFormat format) =>
+        public static void SaveAs(this Bitmap source, string fileName, ImageFormat format)
+        {
+            string path = Path.GetDirectoryName(fileName);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
             source.Save(fileName, format);
+        }            
 
         // todo: format can be set from app settings
-        public static void Save(this Bitmap source) =>
-            SaveAs(source, NewImageFile, ImageFormat.Jpeg);
+        public static string Save(this Bitmap source)
+        {
+            var imageFile = NewImageFile;
+            SaveAs(source, imageFile, ImageFormat.Jpeg);
+            return imageFile;
+        }            
     }
 }
