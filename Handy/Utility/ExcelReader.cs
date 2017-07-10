@@ -41,6 +41,15 @@ namespace Utility
         {
             return from a in _book.Worksheet<T>(sheet ?? Path.GetFileNameWithoutExtension(_excelFile)) select a;
         }
+
+        // read two columns from CSV file and make into dictionary - this one doesn't handle special words other than English - FIXME:
+        public Dictionary<string, string> ReadCsv(string csvFile)
+        {
+            return File.ReadLines(csvFile)
+                .Where(line => !string.IsNullOrWhiteSpace(line) && line[0] != '!')
+                .Select(line => line.Split(','))
+                .ToDictionary(data => data[0].Trim(), data => data.Length > 1 ? data[1].Trim() : string.Empty);
+        }
     }
 
     /// <summary>
