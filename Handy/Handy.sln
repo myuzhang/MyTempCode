@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{DE70B444-F602-48EF-A0A9-C85925AEFBCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelChart", "ExcelChart\ExcelChart.csproj", "{F642D105-9CBB-49D6-9BB8-22F486B53028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{8D539EE5-0862-4D54-84BD-EF67B79696B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{DE70B444-F602-48EF-A0A9-C85925AEFBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE70B444-F602-48EF-A0A9-C85925AEFBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE70B444-F602-48EF-A0A9-C85925AEFBCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F642D105-9CBB-49D6-9BB8-22F486B53028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F642D105-9CBB-49D6-9BB8-22F486B53028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F642D105-9CBB-49D6-9BB8-22F486B53028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F642D105-9CBB-49D6-9BB8-22F486B53028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D539EE5-0862-4D54-84BD-EF67B79696B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D539EE5-0862-4D54-84BD-EF67B79696B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D539EE5-0862-4D54-84BD-EF67B79696B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D539EE5-0862-4D54-84BD-EF67B79696B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
