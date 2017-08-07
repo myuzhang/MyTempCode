@@ -33,7 +33,18 @@ namespace Test
             {
                 var excelfile = Path.Combine(System.IO.Directory.GetCurrentDirectory(), @"Samples\DhaModel.xlsx");
                 creator.ReadExcel(excelfile);
-                creator.ExportChartsTo("Polar Plots", @"c:\temp", "png");
+                creator.ExportCharts("Polar Plots", @"c:\temp", "png");
+            }
+        }
+
+        [TestMethod]
+        public void ExportCombinedCharts()
+        {
+            using (var creator = new ExcelHelper())
+            {
+                var excelfile = Path.Combine(System.IO.Directory.GetCurrentDirectory(), @"Samples\DhaModel.xlsx");
+                creator.ReadExcel(excelfile);
+                creator.ExportChartsAsCombined("Polar Plots", @"c:\temp\combined.png", 3, 2);
             }
         }
     }
