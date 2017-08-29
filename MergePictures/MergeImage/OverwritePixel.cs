@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace MergeImage
@@ -11,7 +10,7 @@ namespace MergeImage
         private readonly string _fromImageFile;
         private readonly string _toImageFile;
         private readonly Settings _settings;
-        
+
         public OverwritePixel(string fromImageFile, string toImageFile)
         {
             _toImageFile = toImageFile;
@@ -29,26 +28,8 @@ namespace MergeImage
             }
         }
 
-        public Bitmap OverwriteWithoutPlotBackground()
-        {
-            //var from = GetScaledColorImage(_fromImageFile);
-            var from = new Bitmap(_fromImageFile);
-            var to = GetScaledColorImage(_toImageFile);
-
-            for (int y = 0; y < from.Height; y++)
-            {
-                for (int x = 0; x < from.Height; x++)
-                {
-                    if (!from.GetPixel(x, y).Name.Equals(_settings.BackgroundColorName))
-                        to.SetPixel(x, y, from.GetPixel(x, y));
-                }
-            }
-            return to;
-        }
-
         public Bitmap OverwriteWithPlotBackground()
         {
-            //var from = GetScaledColorImage(_fromImageFile);
             var from = new Bitmap(_fromImageFile);
             var to = GetScaledColorImage(_toImageFile);
 
@@ -64,10 +45,12 @@ namespace MergeImage
                 for (int y = _settings.BorderWidthInPixel; y < from.Height - _settings.BorderWidthInPixel; y++)
                 {
                     var p = from.GetPixel(x, y);
-                    if (p.Name.Equals(_settings.PlotBorderColorName))
+                    if (p.Name.Equals(_settings.PlotBorderColorName) ||
+                        p.R <= _settings.TolorencePlotBorderR && p.G <= _settings.TolorencePlotBorderG && p.B <= _settings.TolorencePlotBorderB)
                         break;
 
-                    if (p.Name.Equals(_settings.BackgroundColorName))
+                    if (p.Name.Equals(_settings.BackgroundColorName) ||
+                        p.R >= _settings.TolorenceBackgroundR && p.G >= _settings.TolorenceBackgroundG && p.B >= _settings.TolorenceBackgroundB)
                         from.SetPixel(x, y, to.GetPixel(x, y));
                 }
             }
@@ -76,16 +59,15 @@ namespace MergeImage
 
         private Bitmap Overwrite(Bitmap from, Bitmap to)
         {
-            int blockPixel = from.Width / _settings.BlockNumber;
+            int blockPixel = (from.Width - _settings.BorderWidthInPixel * (_settings.BlockNumber - 1)) / _settings.BlockNumber;
             for (int y = _settings.BorderWidthInPixel; y < from.Height - _settings.BorderWidthInPixel; y++)
             {
                 for (int blockNum = 0; blockNum < _settings.BlockNumber; blockNum++)
                 {
                     int validStart;
                     int validEnd;
-                    int leftBorder = blockPixel * blockNum + _settings.BorderWidthInPixel;
-                    int rightBorder = blockPixel * (blockNum + 1) - _settings.BorderWidthInPixel;
-
+                    int leftBorder = blockPixel * blockNum + _settings.BorderWidthInPixel * blockNum;
+                    int rightBorder = leftBorder + blockPixel - 1;
                     if (GetValidHorizontalColorRange(from, y, leftBorder, rightBorder, out validStart, out validEnd))
                         OverwriteHorizon(from, to, y, validStart, validEnd);
 
@@ -111,11 +93,19 @@ namespace MergeImage
             if (leftBorder > rightBorder)
                 return false;
 
+            // avoid rim color
+            leftBorder++;
+            rightBorder--;
+
             for (int x = leftBorder; x <= rightBorder; x++)
             {
                 var p = source.GetPixel(x, imageY);
                 if (!p.Name.Equals(_settings.BackgroundColorName))
                 {
+                    if (p.R >= _settings.TolorenceBackgroundR && p.G >= _settings.TolorenceBackgroundG && p.B >= _settings.TolorenceBackgroundB)
+                    {
+                        continue;
+                    }
                     validStart = x;
                     found = true;
                     break;
@@ -129,6 +119,10 @@ namespace MergeImage
                 var p = source.GetPixel(x, imageY);
                 if (!p.Name.Equals(_settings.BackgroundColorName))
                 {
+                    if (p.R >= _settings.TolorenceBackgroundR && p.G >= _settings.TolorenceBackgroundG && p.B >= _settings.TolorenceBackgroundB)
+                    {
+                        continue;
+                    }
                     validEnd = x;
                     break;
                 }
@@ -174,10 +168,6 @@ namespace MergeImage
                 if (!_settings.NeedScale)
                     throw new ArgumentException("Merging pictures don't have the same size");
 
-                // for debugging:
-                //from.Save("from.jpg", ImageFormat.Jpeg);
-                //to.Save("to.jpg", ImageFormat.Jpeg);
-                
                 return new Bitmap(returnImage, new Size(from.Width, from.Height));
             }
 
