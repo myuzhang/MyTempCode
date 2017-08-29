@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+  <add key="Path" value="\\OCDServer01\OCD_DATA\10. Software Development\ROM\ImplantLibrary"/>
+  <!--ROM required data-->
+  <add key="SurgeonPreferences" value="\\OCDServer01\OCD_DATA\10. Software Development\ROM\CorinSurgeonPreferences.xlsx"/>
+  <add key="ROMParamData" value="\\OCDServer01\OCD_DATA\10. Software Development\ROM\ROMParamData.csv"/>
+  <add key="NeckWidthMapping" value="\\OCDServer01\OCD_DATA\10. Software Development\ROM\NeckWidthMapping.xml"/>
+  <!--ROM application config-->
+  <add key="romApplication" value="C:\Program Files\romGenerateColorMap\application\romGenerateColorMap.exe" />
+  <add key="romDataParamsFile" value="RomDataParams.json" />
+  <add key="romInDetail" value="true" />
+  <add key="romParamSource" value="file" />
+  <!--Report data setting-->
+  <add key="PsvSettingData" value="\\Ocdserver01\ocd_data\10. Software Development\ROM\PsvSettingData.xml"/>
+  <add key="FemoralSettingData" value="\\Ocdserver01\ocd_data\10. Software Development\ROM\FemoralSettingData.xml"/>
+  <add key="HipSettingData" value="\\Ocdserver01\ocd_data\10. Software Development\ROM\HipSettingData.xml"/>
+  <!--Report common data setting-->
+  <add key="AddressSettingData" value="\\Ocdserver01\ocd_data\10. Software Development\ROM\AddressSettingData.xml"/>
+  <add key="SymbolSettingData" value="\\Ocdserver01\ocd_data\10. Software Development\ROM\SymbolSettingData.xml"/>
+</appSettings>
