@@ -1,8 +1,13 @@
 {
-	"blockNumber":3,
-	"borderWidthInPixel":2,
-	"backgroundColorName":"ffffffff",
-	"plotBorderColorName":"ff000000",
-	"needScale":true,
-	"mergedFileDefaultPath":"c:\\Temp"
+  "blockNumber": 3,
+  "borderWidthInPixel": 1,
+  "backgroundColorName": "ffffffff",
+  "plotBorderColorName": "ff000000",
+  "tolorenceBackgroundR": 200,
+  "tolorenceBackgroundG": 180,
+  "tolorenceBackgroundB": 180,
+  "tolorencePlotBorderR": 90,
+  "tolorencePlotBorderG": 90,
+  "tolorencePlotBorderB": 90,
+  "needScale": true
 }
