@@ -14,13 +14,13 @@ namespace IntegrationTools
         //<add key = "AWSAccessKey" value="" />
         //<add key = "AWSSecretKey" value="" />
         //</appSettings>
-        public AwsSqsService(string sqsUrl)
+        public AwsSqsUtility(string sqsUrl)
         {
             _sqsUrl = sqsUrl;
             _amazonSqsClient = new AmazonSQSClient(new AmazonSQSConfig { ServiceURL = sqsUrl });
         }
 
-        public AwsSqsService(string awsAccessKeyId, string awsSecretAccessKey, string sqsUrl)
+        public AwsSqsUtility(string awsAccessKeyId, string awsSecretAccessKey, string sqsUrl)
         {
             _sqsUrl = sqsUrl;
             _amazonSqsClient =
