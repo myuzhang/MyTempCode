@@ -12,7 +12,8 @@ namespace IntegrationTools
 
         private readonly string _botToken;
 
-        public Slack(string botToken)
+        // the botToken starts with xoxb-
+        public SlackUtility(string botToken)
         {
             _client = new RestClient("https://slack.com");
             _botToken = botToken;
