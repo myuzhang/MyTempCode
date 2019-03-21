@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutomationFramework.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpenQA.Selenium.Support.UI;
 
 namespace TestHelpers
 {
@@ -40,6 +37,6 @@ namespace TestHelpers
                 Console.WriteLine(message);
                 return jsonString;
             }
-        }        
+        }
     }
 }
