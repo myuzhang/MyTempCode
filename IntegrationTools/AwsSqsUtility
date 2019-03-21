@@ -1,0 +1,41 @@
+using System;
+using Amazon.SQS;
+using Amazon.SQS.Model;
+
+namespace IntegrationTools
+{
+    public class AwsSqsUtility : IDisposable
+    {
+        private readonly string _sqsUrl;
+        private readonly AmazonSQSClient _amazonSqsClient;
+
+        // to use this constructor, put your credential in app.config file:
+        //<appSettings>
+        //<add key = "AWSAccessKey" value="" />
+        //<add key = "AWSSecretKey" value="" />
+        //</appSettings>
+        public AwsSqsService(string sqsUrl)
+        {
+            _sqsUrl = sqsUrl;
+            _amazonSqsClient = new AmazonSQSClient(new AmazonSQSConfig { ServiceURL = sqsUrl });
+        }
+
+        public AwsSqsService(string awsAccessKeyId, string awsSecretAccessKey, string sqsUrl)
+        {
+            _sqsUrl = sqsUrl;
+            _amazonSqsClient =
+                new AmazonSQSClient(awsAccessKeyId, awsSecretAccessKey, new AmazonSQSConfig { ServiceURL = sqsUrl });
+        }
+
+        public SendMessageRequest GetRequest(long accountNumber, string queueName, string messageBody) => new SendMessageRequest
+        {
+            QueueUrl = $"{_sqsUrl}/{accountNumber}/{queueName}",
+            MessageBody = messageBody
+        };
+
+        public SendMessageResponse SendMessage(SendMessageRequest request) =>
+            _amazonSqsClient.SendMessage(request);
+
+        public void Dispose() => _amazonSqsClient?.Dispose();
+    }
+}
