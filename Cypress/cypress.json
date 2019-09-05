@@ -1,0 +1,16 @@
+{
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "baseUrl": "xxx",
+  "defaultCommandTimeout": 20000,
+  "pageLoadTimeout": 60000,
+  "execTimeout": 60000,
+  "requestTimeout": 30000,
+  "responseTimeout": 30000,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "projectId": "123f456",
+  "env": {
+    "appUrl": "xxx",
+    "apiUrl": "xxx"
+  }
+}
