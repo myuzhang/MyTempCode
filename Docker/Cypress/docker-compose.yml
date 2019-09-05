@@ -1,0 +1,34 @@
+# docker-compose.yml from repo
+# https://github.com/bahmutov/cypress-open-from-docker-compose
+version: '3.2'
+services:
+  # Cypress container
+  cypress1:
+    # the Docker image to use from https://github.com/cypress-io/cypress-docker-images
+    image: "cypress/included:3.2.0"
+    env_file:
+      # pass base url to test pointing at the web application
+      - ./platform.env
+    entrypoint:
+      - cypress
+      - run
+      - --spec=/e2e/tests/e2e/specs/02-adviser/00-e2e/smoke.spec.js
+    # share the current folder as volume to avoid copying
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
+  # Cypress container
+  cypress2:
+    # the Docker image to use from https://github.com/cypress-io/cypress-docker-images
+    image: "cypress/included:3.2.0"
+    env_file:
+      # pass base url to test pointing at the web application
+      - ./platform.env
+    entrypoint:
+      - cypress
+      - run
+      - --spec=/e2e/tests/e2e/specs/03-admin/00-e2e/smoke.spec.js
+    # share the current folder as volume to avoid copying
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
