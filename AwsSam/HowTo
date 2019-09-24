@@ -1,0 +1,3 @@
+1, install aws, sam and AWS Kit for Visual Studio Code
+2, run "sam local start-api" to launch the service
+3, debug "sam local start-api -d 5858" to launch the debug mode, then attach AWS Kit by click debug button in VS code
